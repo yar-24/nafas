@@ -26,8 +26,8 @@ const Home = () => {
       <Banner alignItems={{ lg: 'start', xs: 'center' }}>
         <Title>
           {locale === 'id'
-            ? 'Kiat, trik, dan panduan untuk membuat perawatan tanaman benar-benar mudah'
-            : 'Tips, tricks, and plant guides to make plant care downright easy'}
+            ? 'Kiat, trik, dan panduan untuk membuat perawatan binatang peliharaan benar-benar mudah'
+            : 'Tips, tricks, and guides to make pets care downright easy'}
         </Title>
         <Tombol
           sx={{ alignSelf: { lg: 'end' } }}

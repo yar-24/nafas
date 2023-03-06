@@ -71,7 +71,6 @@ const CardList = ({ children }) => {
         <Carousel
           ssr
           partialVisbile
-          // deviceType={deviceType}
           itemClass="image-item"
           responsive={responsive}
         >
