@@ -17,7 +17,7 @@ const Title = styled.h1`
   }
 `;
 
-const Home = ({ addItem }) => {
+const Home = () => {
   const { locale } = React.useContext(LocaleContext);
 
   return (
@@ -26,8 +26,8 @@ const Home = ({ addItem }) => {
       <Banner alignItems={{ lg: 'start', xs: 'center' }}>
         <Title>
           {locale === 'id'
-            ? 'Kiat, trik, dan panduan untuk membuat perawatan tanaman benar-benar mudah'
-            : 'Tips, tricks, and plant guides to make plant care downright easy'}
+            ? 'Kiat, trik, dan panduan untuk membuat perawatan binatang peliharaan benar-benar mudah'
+            : 'Tips, tricks, and guides to make pets care downright easy'}
         </Title>
         <Tombol
           sx={{ alignSelf: { lg: 'end' } }}
@@ -36,7 +36,7 @@ const Home = ({ addItem }) => {
           label={locale === 'id' ? 'Baca blog lainnya' : 'Read more blogs'}
         />
       </Banner>
-      <CardList addItem={addItem}>
+      <CardList >
         {locale === 'id' ? 'Kategori Populer' : 'Popular Categories'}
       </CardList>
     </>

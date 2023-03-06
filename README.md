@@ -1,9 +1,3 @@
-# TEAM CAPSTONE C22 - 006
-1.	R009X0052 - Akhyar Ramadhan
-2.	R131X0220 - Moch. Rofiqi
-3.	R009X0073 - Muhammad Fadhli 
-4.	R359X0924 - Rahman Qolbi
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
