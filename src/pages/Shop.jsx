@@ -1,12 +1,14 @@
 import { Typography } from '@mui/material';
 import { Container, Stack } from '@mui/system';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import Filter from '../components/Filter';
 import DrawerFilter from '../components/kecil/DrawerFilter';
 import Product from '../components/Product';
 import { useFilter } from '../contexts/filterContext';
 import LocaleContext from '../contexts/LocaleContext';
+import { getProducts } from '../redux/features/products/productSlice';
 import {
   fonts,
   getProductsByBenefit,
@@ -21,9 +23,9 @@ import {
 const Shop = () => {
   const { locale } = React.useContext(LocaleContext);
   const [drawerFilter, setdrawerFilter] = useState(false);
+  const [products, setproducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [Sort, setSort] = useState('');
-
-  const { products, isLoading } = useSelector((states) => states.products);
 
   const handlePriceChange = (e) => {
     setSort(e.target.value);
@@ -51,6 +53,25 @@ const Shop = () => {
     setdrawerFilter(open);
   };
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts())
+      .then((res) => {
+        const data = res.payload;
+        setproducts(data);
+        setIsLoading(true);
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
+  }, [dispatch]);
+
   const {
     filterDispatch,
     sort,
@@ -62,7 +83,7 @@ const Shop = () => {
     sale,
   } = useFilter();
 
-  const filteredProductsByPriceSort = getProductsByPriceSort(products.products, sort);
+  const filteredProductsByPriceSort = getProductsByPriceSort(products, sort);
   const filteredProductsByPlantTipe = getProductsByPlantTipe(
     filteredProductsByPriceSort,
     plantTipe

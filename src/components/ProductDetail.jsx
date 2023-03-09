@@ -7,12 +7,8 @@ import LocaleContext from "../contexts/LocaleContext";
 import Skeleton from "@mui/material/Skeleton";
 import { colors, fonts } from "../utils";
 
-export default function ProductDetail({
-  namePlant,
-  plantLike,
-  plantAbout,
-  loading,
-}) {
+export default function ProductDetail({ product, loading }) {
+  const { namePlant, plantLike, plantAbout } = product
   const { locale } = useContext(LocaleContext);
   const [open, setOpen] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -43,7 +39,7 @@ export default function ProductDetail({
               disableGutters
               disableRipple
               onClick={handleClick}
-              disabled={!loading}
+              disabled={loading}
             >
               <Typography
                 variant="h5"
@@ -92,7 +88,7 @@ export default function ProductDetail({
               disableGutters
               disableRipple
               onClick={handleClick3}
-              disabled={!loading}
+              disabled={loading}
             >
               <Typography
                 variant="h5"

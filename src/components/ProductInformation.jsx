@@ -71,17 +71,22 @@ const ProductInformation = ({ product, loading }) => {
       >
         <ImageContainer>
           {loading ? (
+            <Skeleton variant="rectangular" animation="wave" height={"100%"} />
+          ) : (
             <ProductImage
               src={`https://res.cloudinary.com/eundangdotcom/image/upload/${idImageProduct}`}
               alt={namePlant}
             />
-          ) : (
-            <Skeleton variant="rectangular" animation="wave" height={"100%"} />
           )}
         </ImageContainer>
         <Stack sx={{ flex: 3 }} spacing={4} justifyContent="space-between">
           <Box>
             {loading ? (
+              <>
+                <Skeleton variant="text" animation="wave" width={"30%"} />
+                <Skeleton variant="text" animation="wave" width={"50%"} />
+              </>
+            ) : (
               <>
                 <Typography
                   variant="h5"
@@ -103,15 +108,17 @@ const ProductInformation = ({ product, loading }) => {
                     : "Choose plant height (cm)"}
                 </Typography>
               </>
-            ) : (
-              <>
-                <Skeleton variant="text" animation="wave" width={"30%"} />
-                <Skeleton variant="text" animation="wave" width={"50%"} />
-              </>
             )}
 
             <Stack spacing={2} direction={{ xs: "column", md: "row" }}>
               {loading ? (
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
+                  width={100}
+                  height={50}
+                />
+              ) : (
                 Array.isArray(plantHeight) ? (
                   plantHeight.map((item, index) => (
                     <CustomButton
@@ -123,16 +130,11 @@ const ProductInformation = ({ product, loading }) => {
                     </CustomButton>
                   ))
                 ) : null
-              ) : (
-                <Skeleton
-                  variant="rectangular"
-                  animation="wave"
-                  width={100}
-                  height={50}
-                />
               )}
             </Stack>
             {loading ? (
+              <Skeleton animation="wave" variant="text" width={"20%"} />
+            ) : (
               <Typography
                 variant="body1"
                 lineHeight={2}
@@ -141,10 +143,10 @@ const ProductInformation = ({ product, loading }) => {
               >
                 <TiWeatherPartlySunny color="orange" size={25} /> {plantLight}
               </Typography>
-            ) : (
-              <Skeleton animation="wave" variant="text" width={"20%"} />
             )}
             {loading ? (
+              <Skeleton animation="wave" variant="text" width={"20%"} />
+            ) : (
               <Typography
                 variant="body1"
                 lineHeight={2}
@@ -153,13 +155,18 @@ const ProductInformation = ({ product, loading }) => {
               >
                 <GiBottleVapors color={colors.secondary} size={25} /> {care}
               </Typography>
-            ) : (
-              <Skeleton animation="wave" variant="text" width={"20%"} />
             )}
           </Box>
           <Stack>
             {" "}
             {loading ? (
+              <Skeleton
+                animation="wave"
+                variant="text"
+                width={"40%"}
+                height={40}
+              />
+            ) : (
               <Typography
                 variant="h6"
                 component="p"
@@ -168,15 +175,15 @@ const ProductInformation = ({ product, loading }) => {
               >
                 {locale === "id" ? "Mulai Dari" : "From"} {rupiah(price)}
               </Typography>
-            ) : (
-              <Skeleton
-                animation="wave"
-                variant="text"
-                width={"40%"}
-                height={40}
-              />
             )}
             {loading ? (
+              <Skeleton
+                animation="wave"
+                variant="rectangular"
+                width={"100%"}
+                height={40}
+              />
+            ) : (
               <CustomButton
                 onClick={isItemInCart ? handleGoToCart : handleAddToCart}
                 startIcon={<FaShoppingCart />}
@@ -192,13 +199,6 @@ const ProductInformation = ({ product, loading }) => {
                     ? "Tambahkan ke Keranjang"
                     : "Add To Bag"}
               </CustomButton>
-            ) : (
-              <Skeleton
-                animation="wave"
-                variant="rectangular"
-                width={"100%"}
-                height={40}
-              />
             )}
           </Stack>
         </Stack>

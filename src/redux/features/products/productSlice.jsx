@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import productService from './productService'
 
-const products = JSON.parse(localStorage.getItem("products"));
-
 const initialState = {
-  products: products ? products : null,
+  products: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -108,12 +106,7 @@ export const productSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    reset: (state) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = false;
-        state.message = "";
-      },
+    reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -190,5 +183,5 @@ export const productSlice = createSlice({
   },
 })
 
-export const { reset } = productSlice.actions
+export const { reset } = productSlice.actions;
 export default productSlice.reducer

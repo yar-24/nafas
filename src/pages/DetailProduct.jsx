@@ -1,6 +1,6 @@
 import { Box, Container, Skeleton, Stack, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import BannerFreeOngkir from "../components/BannerFreeOngkir";
@@ -9,24 +9,19 @@ import ProductDetail from "../components/ProductDetail";
 import ProductInformation from "../components/ProductInformation";
 import LocaleContext from "../contexts/LocaleContext";
 import { getProduct } from "../redux/features/products/productSlice";
-import ImagePreview from "../components/kecil/ImagePreview";
-
-const ProductImage = styled("img")`
-  object-fit: cover;
-  max-width: 100%;
-  height: 100%;
-  vertical-align: middle;
-  cursor: pointer;
-`;
 
 const DetailProduct = () => {
   const { locale } = React.useContext(LocaleContext);
   const [loading, setLoading] = useState(false);
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState({});
   const { id } = useParams();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const ProductImage = styled("img")`
+    object-fit: cover;
+    max-width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  `;
 
   const dispatch = useDispatch();
 
@@ -34,7 +29,7 @@ const DetailProduct = () => {
     setLoading(false);
     dispatch(getProduct(id))
       .then((res) => {
-        const data = res.payload.product;
+        const data = res.payload;
         setLoading(true);
         setProduct(data);
       })
@@ -50,8 +45,7 @@ const DetailProduct = () => {
 
   return (
     <>
-      <ImagePreview open={open} handleClose={handleClose} product={product} loading={loading} />
-      <ProductInformation product={product} loading={loading} />
+      <ProductInformation product={product} loading={!loading} />
       <Container fixed sx={{ my: 4 }}>
         <Stack component="ul" direction="row" gap={{ xs: 1, sm: 2, md: 4 }}>
           {Array.isArray(product.images)
@@ -60,8 +54,8 @@ const DetailProduct = () => {
                   {loading ? (
                     <ProductImage
                       src={`https://res.cloudinary.com/eundangdotcom/image/upload/${item.image_id}`}
-                      alt={item.image_id}
-                      onClick={handleOpen}
+                      key={item.image_id}
+                      alt=""
                     />
                   ) : (
                     <Skeleton
@@ -78,12 +72,7 @@ const DetailProduct = () => {
             : null}
         </Stack>
       </Container>
-      <ProductDetail
-        namePlant={product.namePlant}
-        plantAbout={product.plantAbout}
-        plantLike={product.plantLike}
-        loading={loading}
-      />
+      <ProductDetail product={product} loading={loading} />
       <BannerFreeOngkir />
       <CardList>
         {locale === "id" ? "Mungkin Anda Sukai" : "You Might Like"}

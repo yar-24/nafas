@@ -81,7 +81,7 @@ const Product = ({
         container
         rowSpacing={{ xs: 2, sm: 3, md: 2, lg: 3 }}
         columnSpacing={{ xs: 0, sm: 3, md: 2, lg: 3 }}>
-        {loading ? (
+        {!loading ? (
           Array.from(new Array(6)).map((index) => (
             <Grid item key={index} xs={12} sm={12} md={4}>
               <SkeletonCardItem />

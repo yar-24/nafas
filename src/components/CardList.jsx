@@ -6,10 +6,10 @@ import { fonts } from "../utils";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import SkeletonCardItem from "./kecil/SkeletonCardItem";
-import { useParams } from "react-router-dom";
 import { getProducts } from "../redux/features/products/productSlice";
 import Swal from "sweetalert2";
+import SkeletonCardItem from "./kecil/SkeletonCardItem";
+import { useParams } from "react-router-dom";
 
 const TitleText = styled(Typography)`
   font-family: ${fonts.comfortaa};
@@ -18,8 +18,6 @@ const TitleText = styled(Typography)`
 `;
 
 const CardList = ({ children }) => {
-  const [products, setproducts] = useState([]);
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -38,14 +36,18 @@ const CardList = ({ children }) => {
     }
   };
 
-  const { id } = useParams();
+  const [products, setproducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getProducts())
       .then((res) => {
-        const data = res.payload.products;
+        const data = res.payload;
         setproducts(data);
+        setIsLoading(true);
       })
       .catch((err) => {
         Swal.fire({
@@ -57,9 +59,6 @@ const CardList = ({ children }) => {
       });
   }, [dispatch]);
 
-
-  const { isLoading } = useSelector((states) => states.products);
-  
   const filterProducts = products.filter((product) => product._id !== id);
 
   return (
@@ -68,17 +67,18 @@ const CardList = ({ children }) => {
         {children}
       </TitleText>
       <Stack mx={1} my={5}>
-        <Carousel
+      <Carousel
           ssr
           partialVisbile
+          // deviceType={deviceType}
           itemClass="image-item"
           responsive={responsive}
         >
-          {(isLoading ? Array.from(new Array(4)) : filterProducts).map(
+          {(!isLoading ? Array.from(new Array(4)) : filterProducts).map(
             (product, index) => (
               <Box sx={{ mx: 2 }} key={index}>
                 {product ? (
-                  <CardItem product={product} />
+                  <CardItem product={product}/>
                 ) : (
                   <SkeletonCardItem />
                 )}
