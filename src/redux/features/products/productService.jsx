@@ -36,7 +36,7 @@ const getProduct = async (productId, productData) => {
     config
   );
 
-  return response.data;
+  return response.data.product;
 };
 
 // Get product
@@ -47,13 +47,9 @@ const getProducts = async () => {
     },
   };
 
-  const response = await axiosInstance.get("/products", config);
+  const response = await axiosInstance.get("/products", config)
 
-  if (response.data) {
-    localStorage.setItem('products', JSON.stringify(response.data.products))
-  }
-
-  return response.data;
+  return response.data.products;
 };
 
 //update product

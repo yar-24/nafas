@@ -93,8 +93,6 @@ const ImagePreview = ({ handleClose, open, product, loading }) => {
                 ? product.images.map((item, index) => (
                     <Box component="li" sx={{ flex: 1 }} key={index}>
                       {loading ? (
-                        <ProductImage src={`https://res.cloudinary.com/eundangdotcom/image/upload/${item.image_id}`} alt={item.image_id} />
-                      ) : (
                         <Skeleton
                           variant="rectangular"
                           animation="wave"
@@ -103,6 +101,8 @@ const ImagePreview = ({ handleClose, open, product, loading }) => {
                             height: { md: 220, xs: 90 },
                           }}
                         />
+                      ) : (
+                        <ProductImage src={`https://res.cloudinary.com/eundangdotcom/image/upload/${item.image_id}`} alt={item.image_id} />
                       )}
                     </Box>
                   ))
