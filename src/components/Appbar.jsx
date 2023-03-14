@@ -82,13 +82,16 @@ function DrawerAppBar(props) {
   const { locale, changeLocale } = useContext(LocaleContext);
   const cart = useSelector((state) => state.cart.cart);
 
+  
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
+  localStorage.setItem('cart', JSON.stringify(cart))
 
   const onLogout = () => {
     Swal.fire({
