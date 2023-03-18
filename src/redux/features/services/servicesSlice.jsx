@@ -49,9 +49,9 @@ export const getService = createAsyncThunk(
 // Get services
 export const getServices = createAsyncThunk(
   'services/gets',
-  async (_, thunkAPI) => {
+  async (_, query, thunkAPI) => {
     try {
-      return await servicesService.getServices()
+      return await servicesService.getServices(query)
     } catch (error) {
       const message =
         (error.response &&

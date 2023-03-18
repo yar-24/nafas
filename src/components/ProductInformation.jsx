@@ -10,6 +10,7 @@ import LocaleContext from "../contexts/LocaleContext";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/reducer/cartRedux";
+import ImagePreview from "./kecil/ImagePreview";
 
 const ProductImage = styled("img")`
   position: absolute;
@@ -21,6 +22,10 @@ const ProductImage = styled("img")`
   height: 100%;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
+  :hover{
+    opacity:0.8 ;
+  }
 `;
 
 const ImageContainer = styled(Box)`
@@ -35,7 +40,10 @@ const ImageContainer = styled(Box)`
 
 const ProductInformation = ({ product, loading }) => {
   const { locale } = React.useContext(LocaleContext);
+  const [open, setOpen] = useState(false);
+  const [idImg, setIdImg] = useState(0);
   const [count, setCount] = useState(1);
+  const handleClose = () => setOpen(false);
   const {
     _id,
     idImageProduct,
@@ -55,6 +63,11 @@ const ProductInformation = ({ product, loading }) => {
     navigate("/cart");
   };
 
+  const handleOpenId = (idImg) => {
+    setOpen(true)
+    setIdImg(idImg)
+  }
+
   const handleGoToCart = () => {
     navigate("/cart");
   };
@@ -63,6 +76,8 @@ const ProductInformation = ({ product, loading }) => {
   const isItemInCart = getItemById(cart, _id);
 
   return (
+    <>
+    <ImagePreview open={open} handleClose={handleClose} idImg={idImg} loading={!loading}  />
     <Container fixed>
       <Stack
         spacing={{ xs: 2, sm: 4, md: 6 }}
@@ -76,6 +91,7 @@ const ProductInformation = ({ product, loading }) => {
             <ProductImage
               src={`https://res.cloudinary.com/eundangdotcom/image/upload/${idImageProduct}`}
               alt={namePlant}
+              onClick={() => handleOpenId(idImageProduct)}
             />
           )}
         </ImageContainer>
@@ -204,6 +220,7 @@ const ProductInformation = ({ product, loading }) => {
         </Stack>
       </Stack>
     </Container>
+                </>
   );
 };
 

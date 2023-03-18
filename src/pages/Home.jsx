@@ -17,7 +17,7 @@ const Title = styled.h1`
   }
 `;
 
-const Home = () => {
+const Home = ({user}) => {
   const { locale } = React.useContext(LocaleContext);
 
   return (

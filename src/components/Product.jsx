@@ -82,8 +82,8 @@ const Product = ({
         rowSpacing={{ xs: 2, sm: 3, md: 2, lg: 3 }}
         columnSpacing={{ xs: 0, sm: 3, md: 2, lg: 3 }}>
         {!loading ? (
-          Array.from(new Array(6)).map((index) => (
-            <Grid item key={index} xs={12} sm={12} md={4}>
+          Array.from(new Array(6)).map((index, i) => (
+            <Grid item key={i} xs={12} sm={12} md={4}>
               <SkeletonCardItem />
               <h1>{index}</h1>
             </Grid>
