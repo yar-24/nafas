@@ -19,7 +19,12 @@ import { styled } from "@mui/material/styles";
 import { BsFillCartFill, BsSearch } from "react-icons/bs";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { RiSettings3Line, RiSettings3Fill, RiEditFill, RiPlantLine } from "react-icons/ri";
+import {
+  RiSettings3Line,
+  RiSettings3Fill,
+  RiEditFill,
+  RiPlantLine,
+} from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -89,6 +94,8 @@ function DrawerAppBar(props) {
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+
+  localStorage.setItem("cart", JSON.stringify(cart));
 
   const onLogout = () => {
     Swal.fire({
@@ -292,27 +299,29 @@ function DrawerAppBar(props) {
                     style={{ color: "black", position: "relative" }}
                   >
                     <BsFillCartFill />
-                    {cart.length > 0 ? (
-                      <Typography
-                        variant="span"
-                        sx={{
-                          minWidth: "20px",
-                          minHeight: "20px",
-                          position: "absolute",
-                          color: "white",
-                          backgroundColor: "red",
-                          fontSize: "14px",
-                          fontWeight: 700,
-                          textAlign: "center",
-                          lineHeight: 1.6,
-                          px: "4px",
-                          borderRadius: 16,
-                          right: 0,
-                          top: 0,
-                        }}
-                      >
-                        {cart.length}
-                      </Typography>
+                    {user ? (
+                      cart.length > 0 ? (
+                        <Typography
+                          variant="span"
+                          sx={{
+                            minWidth: "20px",
+                            minHeight: "20px",
+                            position: "absolute",
+                            color: "white",
+                            backgroundColor: "red",
+                            fontSize: "14px",
+                            fontWeight: 700,
+                            textAlign: "center",
+                            lineHeight: 1.6,
+                            px: "4px",
+                            borderRadius: 16,
+                            right: 0,
+                            top: 0,
+                          }}
+                        >
+                          {cart.length}
+                        </Typography>
+                      ) : null
                     ) : null}
                   </IconButton>
                   <IconButton
@@ -397,7 +406,7 @@ function DrawerAppBar(props) {
                   >
                     <List sx={{ border: `1px solid ${colors.secondary}` }}>
                       {menuPoppers.map((item, index) => (
-                        <ListItem disablePadding key={index}> 
+                        <ListItem disablePadding key={index}>
                           <ListItemButton
                             component={Link}
                             to={item.link}

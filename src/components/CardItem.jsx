@@ -100,7 +100,7 @@ const CardItem = ({ product, loading }) => {
             alt={namePlant}
           />
           <CardContent>
-            <PlantTitleText>{getText(truncate(namePlant, 17))}</PlantTitleText>
+            <PlantTitleText noWrap >{namePlant}</PlantTitleText>
             <PlantPriceText mt={2}>
               {locale === "id" ? "Dari" : "From"} {rupiah(price)}
             </PlantPriceText>

@@ -33,14 +33,14 @@ const getService = async (serviceId, serviceData) => {
 };
 
 // Get services
-const getServices = async () => {
+const getServices = async (query) => {
   const config = {
     headers: {
       "content-type": "multipart/form-data",
     },
   };
 
-  const response = await axiosInstance.get("/services/?q=", config);
+  const response = await axiosInstance.get(`/services/?q=${query}`, config);
 
   if (response.data) {
     localStorage.setItem("services", JSON.stringify(response.data));

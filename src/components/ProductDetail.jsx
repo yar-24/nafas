@@ -39,7 +39,7 @@ export default function ProductDetail({ product, loading }) {
               disableGutters
               disableRipple
               onClick={handleClick}
-              disabled={loading}
+              disabled={!loading}
             >
               <Typography
                 variant="h5"
@@ -88,7 +88,7 @@ export default function ProductDetail({ product, loading }) {
               disableGutters
               disableRipple
               onClick={handleClick3}
-              disabled={loading}
+              disabled={!loading}
             >
               <Typography
                 variant="h5"

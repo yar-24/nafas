@@ -33,8 +33,8 @@ const ScrollToTop = () => {
       sx={{
         display: visible ? "inline" : "none",
         position: "fixed",
-        bottom: "50px",
-        right: "50px",
+        bottom: "100px",
+        right: "25px",
         color: colors.secondary,
         fontSize: 25
       }}
