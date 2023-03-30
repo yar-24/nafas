@@ -15,9 +15,7 @@ import {
   colors,
   fonts,
   getItemById,
-  getText,
   rupiah,
-  truncate,
 } from "../utils/";
 import SkeletonCardItem from "./kecil/SkeletonCardItem";
 
