@@ -9,7 +9,8 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
-import { BsFillTelephoneFill, BsInstagram } from 'react-icons/bs';
+import { BsFillTelephoneFill, BsInstagram, BsGithub } from 'react-icons/bs';
+import { MdOutlineEmail } from 'react-icons/md'
 import { HiLocationMarker } from 'react-icons/hi';
 import { MdEmail } from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -102,11 +103,11 @@ const Footer = () => {
           <Grid item xs={12} sm={6} md={3} className="footer-col">
             <h4>{locale === 'id' ? 'Ikuti Kami' : 'Follow us'}</h4>
             <div className="social-links">
-              <Tooltip title="m.rfiqi_">
+              <Tooltip title="yar-24">
                 <Links
-                  href="https://instagram.com/m.rfiqi_?igshid=MDM4ZDc5MmU="
+                  href="https://github.com/yar-24"
                   target="_blank">
-                  <BsInstagram />
+                  <BsGithub />
                 </Links>
               </Tooltip>
               <Tooltip title="artyardhan">
@@ -116,11 +117,11 @@ const Footer = () => {
                   <BsInstagram />
                 </Links>
               </Tooltip>
-              <Tooltip title="rahmanqolbi">
+              <Tooltip title="akhyar24.354@gmail.com">
                 <Links
-                  href="https://www.instagram.com/rahmanqolbi/"
+                  href="https://mail.google.com/"
                   target="_blank">
-                  <BsInstagram />
+                  <MdOutlineEmail />
                 </Links>
               </Tooltip>
             </div>

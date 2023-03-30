@@ -1,131 +1,167 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useState, useEffect, useRef } from "react";
-import * as tf from "@tensorflow/tfjs";
-import * as mobilenet from "@tensorflow-models/mobilenet";
+import React, { useState } from "react";
 import "../styles/classification.scss";
-import { Button, Container, Typography } from "@mui/material";
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import Tombol from "../components/kecil/Tombol";
+import { Button, Container, IconButton, Typography } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+import FileBase64 from "react-file-base64";
+import { LoadingButton } from "@mui/lab";
 
 function ClassificationPage() {
-  const [isModelLoading, setIsModelLoading] = useState(false);
-  const [model, setModel] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  const [results, setResults] = useState([]);
+  const [data, setData] = useState([]);
 
-  const imageRef = useRef();
-  const textInputRef = useRef();
-  const fileInputRef = useRef();
-
-  const uploadImage = (e) => {
-    const { files } = e.target;
-    if (files.length > 0) {
-      const url = URL.createObjectURL(files[0]);
-      setImageUrl(url);
-    } else {
-      setImageUrl(null);
-    }
+  const uploadImage = (files) => {
+    setImagePreview(URL.createObjectURL(files.file));
+    setImageUrl(files);
   };
 
-  const uploadTrigger = () => {
-    fileInputRef.current.click();
+  const clearImage = () => {
+    setImagePreview(null);
+    setImageUrl(null);
   };
-
-  const handleInputChange = (e) => {
-    setImageUrl(e.target.value);
-    setResults([]);
-  };
-
-  const loadModel = async () => {
-    setIsModelLoading(true);
-    try {
-      const model = await mobilenet.load();
-      setModel(model);
-      setIsModelLoading(false);
-    } catch (error) {
-      console.log(error);
-      setIsModelLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    tf.ready().then(() => {
-      loadModel();
-    });
-  }, []);
-
-  if (isModelLoading) {
-    return (
-      <Container sx={{ display: "flex", alignItems: "center", justifyContent: "center" ,height: "50vh" }}>
-        <Typography
-          variant="h4"
-          component="h2"
-        >
-          Initializing...
-        </Typography>
-      </Container>
-    );
-  }
 
   const detectImage = async () => {
-    textInputRef.current.value = "";
-    const results = await model.classify(imageRef.current);
-    setResults(results);
+    const dataPlant = {
+      api_key: process.env.REACT_APP_PLANTID_API_KEY,
+      images: [imageUrl.base64.slice(23)],
+      modifiers: ["crops_fast", "similar_images"],
+      plant_language: "en",
+      plant_details: [
+        "common_names",
+        "name_authority",
+        "watering",
+        "url",
+        "name_authority",
+        "wiki_description",
+        "edible_parts",
+        "taxonomy",
+        "synonyms",
+      ],
+    };
+    setLoading(true);
+    fetch(process.env.REACT_APP_PLANTID_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataPlant),
+    })
+      .then((response) => response.json())
+      .then((responseData) => setData(responseData) && setLoading(false));
   };
 
+  // const setPicIdData = () => {
+  //   const dataPlant = {
+  //     api_key: "jQQMVA3ffDYe0j9iKYzM2A1QL55pCRtoybPcPVSviERYS09Emy",
+  //     images: [plantFile.base64.slice(23)],
+  //     modifiers: ["crops_fast", "similar_images"],
+  //     plant_language: "en",
+  //     plant_details: [
+  //       "common_names",
+  //       "name_authority",
+  //       "watering",
+  //       "url",
+  //       "name_authority",
+  //       "wiki_description",
+  //       "edible_parts",
+  //       "taxonomy",
+  //       "synonyms",
+  //     ],
+  //   };
+
+  //   const dataHealth = {
+  //     api_key: "jQQMVA3ffDYe0j9iKYzM2A1QL55pCRtoybPcPVSviERYS09Emy",
+  //     images: [plantFile.base64.slice(23)],
+  //     modifiers: ["crops_fast", "similar_images"],
+  //     language: "id",
+  //     disease_details: [
+  //       "cause",
+  //       "common_names",
+  //       "classification",
+  //       "description",
+  //       "treatment",
+  //       "url"
+  //     ],
+  //   };
+
+  //   fetch("https://api.plant.id/v2/identify", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(dataPlant),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((responseData) => console.log("Success", responseData));
+
+  //     fetch("https://api.plant.id/v2/health_assessment", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(dataHealth),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((responseData) => console.log("Success", responseData));
+  // };
+
   return (
-    <Container sx={{mt: 3, mb: 5}}>
+    <Container sx={{ mt: 3, mb: 5 }}>
       <h1 className="header">Image Detection</h1>
       <div className="inputField">
-        <input
-          type="file"
-          accept="image/*"
-          capture="camera"
+        <FileBase64
+          multiple={false}
+          onDone={imagePreview ? null : uploadImage}
           className="uploadInput"
-          onChange={uploadImage}
-          ref={fileInputRef}
-        />
-        <Tombol  onClick={uploadTrigger} variant="contained" startIcon={<CameraAltIcon />} label="Upload" />
-        <span className="or">OR</span>
-        <input
-          type="text"
-          placeholder="Enter Image URL"
-          ref={textInputRef}
-          onChange={handleInputChange}
         />
       </div>
       <div className="imageWrapper">
         <div className="imageContent">
           <div className="imageArea">
-            {imageUrl && (
-              <img
-                src={imageUrl}
-                alt="Image Preview"
-                crossOrigin="anonymous"
-                ref={imageRef}
-              />
+            {imagePreview && (
+              <>
+                <IconButton
+                  aria-label="delete"
+                  className="btnClear"
+                  onClick={() => clearImage()}
+                >
+                  <ClearIcon />
+                </IconButton>
+                <img
+                  src={imagePreview}
+                  alt="Image Preview"
+                  crossOrigin="anonymous"
+                />
+              </>
             )}
           </div>
-          {results.length > 0 && (
-            <div className="imageResult">
-              {results.map((result, index) => {
-                return (
-                  <div className="result" key={result.className}>
-                    <span className="name">{result.className}</span>
-                    <span className="accuracy">
-                      Accuracy Level: {(result.probability * 100).toFixed(2)}%{" "}
-                      {index === 0 && (
-                        <span className="bestGuess">Best Guess</span>
-                      )}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          <div className="imageResult">
+            {data.map((result, index) => {
+              return (
+                <div className="result" key={result.className}>
+                  <span className="name">{result.className}</span>
+                  <span className="accuracy">
+                    Accuracy Level: {(result.probability * 100).toFixed(2)}%{" "}
+                    {index === 0 && (
+                      <span className="bestGuess">Best Guess</span>
+                    )}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
         {imageUrl && (
-          <Button variant="contained" onClick={detectImage}>Detect Image</Button>
+          <LoadingButton
+            loading={loading}
+            loadingIndicator="Loading…"
+            variant="contained"
+            onClick={detectImage}
+          >
+            Detect Image
+          </LoadingButton>
         )}
       </div>
     </Container>

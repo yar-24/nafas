@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colors, fonts, rupiah } from "../utils";
+import { colors, fonts, mobile, rupiah } from "../utils";
 import { RiDeleteBinLine } from "react-icons/ri";
 import {
   decreaseCount,
@@ -63,6 +63,7 @@ const ContainerText = styled.div`
 
 const NamePlant = styled.h2`
   font-family: ${fonts.comfortaa};
+  ${mobile({ fontSize: "16px"})}
 `;
 
 const HeightPlant = styled.p`

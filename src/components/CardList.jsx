@@ -5,7 +5,7 @@ import CardItem from "./CardItem";
 import { fonts } from "../utils";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProducts } from "../redux/features/products/productSlice";
 import Swal from "sweetalert2";
 import SkeletonCardItem from "./kecil/SkeletonCardItem";

@@ -31,40 +31,12 @@
     padding: 0 10px;
     display: flex;
   
-    input[type="text"] {
-      max-width: 400px;
-      width: 100%;
-      padding: 5px 10px;
-      font-size: 16px;
-      border-radius: 0;
-      display: inline-block;
-      border: 1px solid #222;
-      outline: none;
-    }
-  
     .uploadInput {
+      display: none;
       width: 0px;
       height: 0px;
       visibility: hidden;
       opacity: 0;
-    }
-  
-    .or {
-      align-items: center;
-      display: inline-flex;
-      padding: 0 20px;
-    }
-  
-    .uploadImage {
-      padding: 8px 16px;
-      font-size: 16px;
-      background: #3c3d37;
-      color: #fff;
-      display: inline-block;
-      border: 0;
-      border-radius: 0;
-      cursor: pointer;
-      outline: none;
     }
   }
   
@@ -74,6 +46,7 @@
     flex: 0 0 60%;
     max-width: 900px;
     height: 70vmin;
+    position: relative;
   
     @media (max-width: 800px) {
       width: 100%;
@@ -91,6 +64,15 @@
       height: 100%;
       object-fit: cover;
     }
+    
+    .btnClear {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      color: red;
+    }
+
   }
   
   .imageResult {

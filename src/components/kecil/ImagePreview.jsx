@@ -19,7 +19,7 @@ const ProductImage = styled("img")`
   margin: auto;
   width: 500px;
   height: 450px;
-  ${mobile({ height: "50vh" })}
+  ${mobile({ height: "100%", width: "100%" })}
 `;
 
 const ImagePreview = ({ handleClose, open, idImg }) => {
