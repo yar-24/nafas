@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
-import { Typography, Container, Stack, Box } from "@mui/material";
-import CardItem from "./CardItem";
-import { fonts } from "../utils";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { useDispatch } from "react-redux";
-import { getProducts } from "../redux/features/products/productSlice";
-import Swal from "sweetalert2";
-import SkeletonCardItem from "./kecil/SkeletonCardItem";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { styled } from '@mui/material/styles';
+import { Typography, Container, Stack, Box } from '@mui/material';
+import CardItem from './CardItem';
+import { fonts } from '../utils';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { useDispatch } from 'react-redux';
+import { getProducts } from '../redux/features/products/productSlice';
+import Swal from 'sweetalert2';
+import SkeletonCardItem from './kecil/SkeletonCardItem';
+import { useParams } from 'react-router-dom';
 
 const TitleText = styled(Typography)`
   font-family: ${fonts.comfortaa};
@@ -51,14 +51,15 @@ const CardList = ({ children }) => {
       })
       .catch((err) => {
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
           footer: err,
         });
       });
   }, [dispatch]);
 
+  // filtering product with params id product on url
   const filterProducts = products.filter((product) => product._id !== id);
 
   return (

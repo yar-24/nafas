@@ -1,23 +1,18 @@
-import { Skeleton } from "@mui/material";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Link, useNavigate } from "react-router-dom";
-import LocaleContext from "../contexts/LocaleContext";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/reducer/cartRedux";
-import {
-  colors,
-  fonts,
-  getItemById,
-  rupiah,
-} from "../utils/";
-import SkeletonCardItem from "./kecil/SkeletonCardItem";
+import { Skeleton } from '@mui/material';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
+import { FaShoppingCart } from 'react-icons/fa';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link, useNavigate } from 'react-router-dom';
+import LocaleContext from '../contexts/LocaleContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../redux/reducer/cartRedux';
+import { colors, fonts, getItemById, rupiah } from '../utils/';
+import SkeletonCardItem from './kecil/SkeletonCardItem';
 
 const CardContainer = styled(Card)`
   border-radius: 0;
@@ -27,7 +22,7 @@ const CardImage = styled(LazyLoadImage)`
   object-fit: cover;
   object-position: center;
 `;
-const CardActionsContainer = styled("div")`
+const CardActionsContainer = styled('div')`
   display: flex;
   padding: 0;
   margin: 0;
@@ -65,15 +60,17 @@ const CardItem = ({ product, loading }) => {
 
   const cart = useSelector((state) => state.cart.cart);
 
+  // add product to  cart
   const handleAddToCart = () => {
     dispatch(addToCart({ item: { ...product, count } }));
     setCount(1);
   };
 
   const handleGoToCart = () => {
-    navigate("/cart");
+    navigate('/cart');
   };
 
+  // if the product is already in the cart
   const isItemInCart = getItemById(cart, _id);
 
   const { locale } = React.useContext(LocaleContext);
@@ -91,16 +88,16 @@ const CardItem = ({ product, loading }) => {
               <Skeleton
                 variant="rectangular"
                 animation="wave"
-                height={"235px"}
+                height={'235px'}
               />
             }
             src={`https://res.cloudinary.com/eundangdotcom/image/upload/v1666578066/${idImageProduct}`}
             alt={namePlant}
           />
           <CardContent>
-            <PlantTitleText noWrap >{namePlant}</PlantTitleText>
+            <PlantTitleText noWrap>{namePlant}</PlantTitleText>
             <PlantPriceText mt={2}>
-              {locale === "id" ? "Dari" : "From"} {rupiah(price)}
+              {locale === 'id' ? 'Dari' : 'From'} {rupiah(price)}
             </PlantPriceText>
           </CardContent>
           <CardActionsContainer>
@@ -119,7 +116,7 @@ const CardItem = ({ product, loading }) => {
               txcolor={colors.white}
               size="large"
             >
-              {locale === "id" ? "Lihat Detail" : "See More"}
+              {locale === 'id' ? 'Lihat Detail' : 'See More'}
             </ActionButton>
           </CardActionsContainer>
         </CardContainer>
