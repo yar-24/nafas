@@ -117,7 +117,8 @@ const Shop = () => {
           variant="h5"
           component="h2"
           align="center"
-          paddingY={4}>
+          paddingY={4}
+        >
           {locale === 'id' ? 'Semua Produk' : 'All Product'}
         </Typography>
         <Stack direction="row" spacing={{ md: 1 }}>

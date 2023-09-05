@@ -128,7 +128,8 @@ function PageSearchBlog() {
             maxWidth="100%"
             container
             rowSpacing={{ xs: 2, md: 3 }}
-            direction="row">
+            direction="row"
+          >
             {filteredContacts.map((item, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card
@@ -137,7 +138,8 @@ function PageSearchBlog() {
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                  }}>
+                  }}
+                >
                   <CardMedia
                     component="img"
                     height="140"
@@ -159,7 +161,8 @@ function PageSearchBlog() {
                       color="primary"
                       component={Link}
                       to={`/blog/detail/${item._id}`}
-                      size="small">
+                      size="small"
+                    >
                       {locale === 'id' ? 'Lihat' : 'See'}
                     </Button>
                   </CardActions>

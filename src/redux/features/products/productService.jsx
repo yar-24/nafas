@@ -1,23 +1,22 @@
-import { axiosInstance } from "../../../utils";
+import { axiosInstance } from '../../../utils';
 
 // Create new product
 const createProduct = async (productData, token) => {
   const config = {
     headers: {
-      Accept: "application/json",
-      "Access-Control-Allow-Origin": "*",
+      Accept: 'application/json',
+      'Access-Control-Allow-Origin': '*',
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axiosInstance
-    .post("/products", productData, config)
-    // .then((res) => {
-    //   console.log("sukses", res);
-    // })
-    // .catch((err) => {
-    //   console.log("err", err);
-    // });
+  const response = await axiosInstance.post('/products', productData, config);
+  // .then((res) => {
+  //   console.log("sukses", res);
+  // })
+  // .catch((err) => {
+  //   console.log("err", err);
+  // });
 
   return response.data;
 };
@@ -26,7 +25,7 @@ const createProduct = async (productData, token) => {
 const getProduct = async (productId, productData) => {
   const config = {
     headers: {
-      "content-type": "multipart/form-data",
+      'content-type': 'multipart/form-data',
     },
   };
 
@@ -43,11 +42,11 @@ const getProduct = async (productId, productData) => {
 const getProducts = async () => {
   const config = {
     headers: {
-      "content-type": "multipart/form-data",
+      'content-type': 'multipart/form-data',
     },
   };
 
-  const response = await axiosInstance.get("/products", config)
+  const response = await axiosInstance.get('/products', config);
 
   return response.data.products;
 };
@@ -57,7 +56,7 @@ const updateProduct = async (productData, productId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
+      'Content-Type': 'multipart/form-data',
     },
   };
 
@@ -75,7 +74,7 @@ const deleteProduct = async (productId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "content-type": "multipart/form-data",
+      'content-type': 'multipart/form-data',
     },
   };
 

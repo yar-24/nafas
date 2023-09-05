@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit'
-import authReducer from './features/auth/authSlice'
-import productsReducer from './features/products/productSlice'
-import servicesReducer from './features/services/servicesSlice'
-import cartReducer from './reducer/cartRedux'
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './features/auth/authSlice';
+import productsReducer from './features/products/productSlice';
+import servicesReducer from './features/services/servicesSlice';
+import cartReducer from './reducer/cartRedux';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +11,6 @@ const store = configureStore({
     services: servicesReducer,
     cart: cartReducer,
   },
-})
+});
 
 export default store;

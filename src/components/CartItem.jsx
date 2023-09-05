@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import { colors, fonts, mobile, rupiah } from "../utils";
-import { RiDeleteBinLine } from "react-icons/ri";
+import React from 'react';
+import styled from 'styled-components';
+import { colors, fonts, mobile, rupiah } from '../utils';
+import { RiDeleteBinLine } from 'react-icons/ri';
 import {
   decreaseCount,
   increaseCount,
   removeFromCart,
-} from "../redux/reducer/cartRedux";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+} from '../redux/reducer/cartRedux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
@@ -46,7 +46,6 @@ const Image = styled.img`
     height: 98px;
     margin: 10px 20px 10px 20px;
   }
-
   :hover {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
@@ -63,7 +62,7 @@ const ContainerText = styled.div`
 
 const NamePlant = styled.h2`
   font-family: ${fonts.comfortaa};
-  ${mobile({ fontSize: "16px"})}
+  ${mobile({ fontSize: '16px' })}
 `;
 
 const HeightPlant = styled.p`
@@ -149,7 +148,6 @@ const CartItem = ({ product }) => {
   const handleClick = () => {
     navigation(`/product/detail/${_id}`);
   };
-
 
   return (
     <Container>

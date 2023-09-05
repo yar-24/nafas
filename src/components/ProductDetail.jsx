@@ -1,14 +1,22 @@
-import React, {useState, useContext} from "react";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Container, ListItem, Typography, Collapse, List, ListItemButton, ListItemText } from "@mui/material";
-import { RiPlantLine } from "react-icons/ri";
-import LocaleContext from "../contexts/LocaleContext";
-import Skeleton from "@mui/material/Skeleton";
-import { colors, fonts } from "../utils";
+import React, { useState, useContext } from 'react';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import {
+  Container,
+  ListItem,
+  Typography,
+  Collapse,
+  List,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
+import { RiPlantLine } from 'react-icons/ri';
+import LocaleContext from '../contexts/LocaleContext';
+import Skeleton from '@mui/material/Skeleton';
+import { colors, fonts } from '../utils';
 
 export default function ProductDetail({ product, loading }) {
-  const { namePlant, plantLike, plantAbout } = product
+  const { namePlant, plantLike, plantAbout } = product;
   const { locale } = useContext(LocaleContext);
   const [open, setOpen] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -26,15 +34,15 @@ export default function ProductDetail({ product, loading }) {
       {loading ? (
         <List
           sx={{
-            width: "100%",
-            bgcolor: "background.paper",
-            display: "contents",
+            width: '100%',
+            bgcolor: 'background.paper',
+            display: 'contents',
             mb: 10,
           }}
           component="ul"
           aria-labelledby="nested-list-subheader"
         >
-          <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               disableGutters
               disableRipple
@@ -48,7 +56,7 @@ export default function ProductDetail({ product, loading }) {
                 fontFamily={fonts.comfortaa}
                 fontWeight={700}
               >
-                {locale === "id"
+                {locale === 'id'
                   ? `Perawatan ${namePlant}`
                   : `${namePlant} Like`}
               </Typography>
@@ -83,7 +91,7 @@ export default function ProductDetail({ product, loading }) {
               </List>
             </Collapse>
           </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               disableGutters
               disableRipple
@@ -97,7 +105,7 @@ export default function ProductDetail({ product, loading }) {
                 fontFamily={fonts.comfortaa}
                 fontWeight={700}
               >
-                {locale === "id"
+                {locale === 'id'
                   ? `Tentang ${namePlant}`
                   : `About ${namePlant}`}
               </Typography>
@@ -122,27 +130,27 @@ export default function ProductDetail({ product, loading }) {
       ) : (
         <List
           sx={{
-            width: "100%",
-            bgcolor: "background.paper",
-            display: "contents",
+            width: '100%',
+            bgcolor: 'background.paper',
+            display: 'contents',
             mb: 10,
           }}
           component="ul"
           aria-labelledby="nested-list-subheader"
         >
-          <ListItem disablePadding sx={{ display: "block", mb: "20px" }}>
+          <ListItem disablePadding sx={{ display: 'block', mb: '20px' }}>
             <Skeleton
               animation="wave"
               variant="rectangular"
-              width={"59%"}
+              width={'59%'}
               height={50}
             />
           </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItem disablePadding sx={{ display: 'block' }}>
             <Skeleton
               animation="wave"
               variant="rectangular"
-              width={"59%"}
+              width={'59%'}
               height={50}
             />
           </ListItem>

@@ -27,6 +27,7 @@ import LocaleContext from '../contexts/LocaleContext';
 import { logout, reset } from '../redux/features/auth/authSlice';
 import { colors, fonts } from '../utils';
 import CustomButton from './CustomButton';
+import { useCart } from '../contexts/cartContext';
 
 const drawerWidth = 240;
 const navItems = [
@@ -56,7 +57,6 @@ const menuPoppers = [
   },
 ];
 
-// if mobile device scrolling navbar
 function ElevationScroll(props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({
@@ -76,7 +76,7 @@ function DrawerAppBar(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [localePopover, setLocalePopover] = useState(null);
   const { locale, changeLocale } = useContext(LocaleContext);
-  const cart = useSelector((state) => state.cart.cart);
+  const { cart } = useCart();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

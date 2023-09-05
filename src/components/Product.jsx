@@ -75,22 +75,35 @@ const Product = ({
           </Select>
         </FormControl>
       </Stack>
+<<<<<<< HEAD
 
+=======
+>>>>>>> c63f26a45c6aa809ca14eda336f93471118b6f7e
       <Grid
         maxWidth="100%"
         container
         rowSpacing={{ xs: 2, sm: 3, md: 2, lg: 3 }}
         columnSpacing={{ xs: 0, sm: 3, md: 2, lg: 3 }}>
         {!loading ? (
+<<<<<<< HEAD
           Array.from(new Array(6)).map((index, i) => (
             <Grid item key={i} xs={12} sm={12} md={4}>
               <SkeletonCardItem />
               <h1>{index}</h1>
+=======
+          Array.from(new Array(6)).map((index) => (
+            <Grid item key={index} xs={12} sm={12} md={4}>
+              <SkeletonCardItem />
+>>>>>>> c63f26a45c6aa809ca14eda336f93471118b6f7e
             </Grid>
           ))
         ) : products.length > 0 ? (
           products.map((product, index) => (
+<<<<<<< HEAD
             <Grid item key={index} xs={12} sm={12} md={4} >
+=======
+            <Grid item key={index} xs={12} sm={12} md={4}>
+>>>>>>> c63f26a45c6aa809ca14eda336f93471118b6f7e
               <CardItem product={product} />
             </Grid>
           ))

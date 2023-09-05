@@ -1,13 +1,13 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { Box } from "@mui/material";
-import { useSelector } from "react-redux";
-import Appbar from "../components/Appbar";
-import Toast from "../components/kecil/Toast";
-import ScrollToTop from "../components/kecil/ScrollToTop";
-import Footer from "../components/Footer";
-import Top from "../components/kecil/Top";
-import alanBtn from "@alan-ai/alan-sdk-web";
+import React, { Suspense, useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
+import Appbar from '../components/Appbar';
+import Toast from '../components/kecil/Toast';
+import ScrollToTop from '../components/kecil/ScrollToTop';
+import Footer from '../components/Footer';
+import Top from '../components/kecil/Top';
+import alanBtn from '@alan-ai/alan-sdk-web';
 import {
   Home,
   Login,
@@ -27,7 +27,7 @@ import {
   ClassificationPage,
   CardPlants,
   DetailPlant,
-} from "../pages";
+} from '../pages';
 
 const Navigation = () => {
   const { user } = useSelector((states) => states.auth);
@@ -40,24 +40,24 @@ const Navigation = () => {
     alanBtn({
       key: process.env.REACT_APP_ALAN_KEY,
       onCommand: ({ command, plants, allCategories, category }) => {
-        if (command === "plantHeadlines") {
+        if (command === 'plantHeadlines') {
           setAllPlants(plants);
-          setAllCategories("");
-          navigate("/allPlants");
-        } else if (command === "allCategories") {
+          setAllCategories('');
+          navigate('/allPlants');
+        } else if (command === 'allCategories') {
           setAllCategories(allCategories);
-          setAllPlants("");
+          setAllPlants('');
           navigate(`/allPlants`);
-        } else if (command === "category") {
+        } else if (command === 'category') {
           console.log(category);
-        } else if (command === "pageHome") {
-          navigate("/");
-        } else if (command === "pageServices") {
-          navigate("/services");
-        } else if (command === "pageShop") {
-          navigate("/shop");
-        } else if (command === "pagePlantCare") {
-          navigate("/plant-care");
+        } else if (command === 'pageHome') {
+          navigate('/');
+        } else if (command === 'pageServices') {
+          navigate('/services');
+        } else if (command === 'pageShop') {
+          navigate('/shop');
+        } else if (command === 'pagePlantCare') {
+          navigate('/plant-care');
         }
       },
     });
