@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
 import { BsFillTelephoneFill, BsInstagram, BsGithub } from 'react-icons/bs';
-import { MdOutlineEmail } from 'react-icons/md'
+import { MdOutlineEmail } from 'react-icons/md';
 import { HiLocationMarker } from 'react-icons/hi';
 import { MdEmail } from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -26,13 +26,14 @@ const Footer = () => {
         <Grid
           container
           rowSpacing={{ xs: 2, md: 4 }}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        >
           <Grid item xs={12} sm={6} md={3} className="footer-col">
             <h4>{locale === 'id' ? 'Tentang' : 'About'}</h4>
             <ul>
               <li>
                 <Link to="/">
-                  {locale === 'id' ? 'Tentang Breath' : 'About Breath'}
+                  {locale === 'id' ? 'Tentang Nafas' : 'About Nafas'}
                 </Link>
               </li>
               <li>
@@ -77,13 +78,13 @@ const Footer = () => {
             <ul>
               <li>
                 <Link>
-                  <HiLocationMarker color="#006d4e" /> Jakarta, Soekarno Hatta
-                  No. 13
+                  <HiLocationMarker color="#006d4e" /> Bekasi, Bulak Perwira
+                  Rt.03/Rw.011 No. 13
                 </Link>
               </li>
               <li>
                 <Link>
-                  <BsFillTelephoneFill color="#006d4e" /> 082050123458
+                  <BsFillTelephoneFill color="#006d4e" /> 085742068498
                 </Link>
               </li>
               <li>
@@ -95,7 +96,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link>
-                  <MdEmail color="#006d4e" /> breath@gmail.com
+                  <MdEmail color="#006d4e" /> akhyar24.354@gmail.com
                 </Link>
               </li>
             </ul>
@@ -104,23 +105,20 @@ const Footer = () => {
             <h4>{locale === 'id' ? 'Ikuti Kami' : 'Follow us'}</h4>
             <div className="social-links">
               <Tooltip title="yar-24">
-                <Links
-                  href="https://github.com/yar-24"
-                  target="_blank">
+                <Links href="https://github.com/yar-24" target="_blank">
                   <BsGithub />
                 </Links>
               </Tooltip>
               <Tooltip title="artyardhan">
                 <Links
                   href="https://instagram.com/artyardhan?igshid=YmMyMTA2M2Y="
-                  target="_blank">
+                  target="_blank"
+                >
                   <BsInstagram />
                 </Links>
               </Tooltip>
               <Tooltip title="akhyar24.354@gmail.com">
-                <Links
-                  href="https://mail.google.com/"
-                  target="_blank">
+                <Links href="https://mail.google.com/" target="_blank">
                   <MdOutlineEmail />
                 </Links>
               </Tooltip>
@@ -136,8 +134,9 @@ const Footer = () => {
           pt={2}
           color="#000"
           fontWeight={400}
-          fontFamily={fonts.inter}>
-          © 2022 Breath. All Rights Reserved.
+          fontFamily={fonts.inter}
+        >
+          © 2022 Nafas. All Rights Reserved.
         </Typography>
       </Container>
     </Box>

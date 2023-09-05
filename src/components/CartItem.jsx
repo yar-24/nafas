@@ -46,6 +46,7 @@ const Image = styled.img`
     height: 98px;
     margin: 10px 20px 10px 20px;
   }
+
   :hover {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);

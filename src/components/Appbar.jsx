@@ -27,7 +27,6 @@ import LocaleContext from '../contexts/LocaleContext';
 import { logout, reset } from '../redux/features/auth/authSlice';
 import { colors, fonts } from '../utils';
 import CustomButton from './CustomButton';
-import { useCart } from '../contexts/cartContext';
 
 const drawerWidth = 240;
 const navItems = [
@@ -76,7 +75,7 @@ function DrawerAppBar(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [localePopover, setLocalePopover] = useState(null);
   const { locale, changeLocale } = useContext(LocaleContext);
-  const { cart } = useCart();
+  const cart = useSelector((state) => state.cart.cart);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -135,7 +134,6 @@ function DrawerAppBar(props) {
     padding: 16px;
   `;
 
-  // mobile display
   const drawer = (
     <Box onClick={handleDrawerToggle}>
       <Typography

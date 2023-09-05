@@ -23,7 +23,6 @@ const Button = styled(CustomButton)`
     width: 80%;
   }
 `;
-
 const ListHarga = ({ textHarga, totalHarga }) => {
   return (
     <ContainerHarga>
@@ -44,7 +43,6 @@ const ListHarga = ({ textHarga, totalHarga }) => {
 const CartList = ({ locale }) => {
   const cart = useSelector((state) => state.cart.cart);
 
-  // calculate the total price
   const subTotal = cart.reduce(
     (price, item) => price + item.count * item.price,
     0

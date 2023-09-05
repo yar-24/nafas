@@ -59,7 +59,6 @@ const CardList = ({ children }) => {
       });
   }, [dispatch]);
 
-  // filtering product with params id product on url
   const filterProducts = products.filter((product) => product._id !== id);
 
   return (

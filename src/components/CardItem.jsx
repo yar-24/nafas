@@ -4,20 +4,15 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../contexts/cartContext';
 import LocaleContext from '../contexts/LocaleContext';
-import {
-  colors,
-  fonts,
-  getItemById,
-  getText,
-  rupiah,
-  truncate,
-} from '../utils/';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../redux/reducer/cartRedux';
+import { colors, fonts, getItemById, rupiah } from '../utils/';
+import SkeletonCardItem from './kecil/SkeletonCardItem';
 
 const CardContainer = styled(Card)`
   border-radius: 0;
@@ -27,7 +22,6 @@ const CardImage = styled(LazyLoadImage)`
   object-fit: cover;
   object-position: center;
 `;
-
 const CardActionsContainer = styled('div')`
   display: flex;
   padding: 0;
@@ -58,17 +52,17 @@ const ActionButton = styled(Button)`
   }
 `;
 
-const CardItem = ({ product }) => {
+const CardItem = ({ product, loading }) => {
   const { _id, idImageProduct, price, namePlant } = product;
-  const { cart, cartDispatch } = useCart();
+  const [count, setCount] = useState(1);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart.cart);
 
   const handleAddToCart = () => {
-    cartDispatch({
-      type: 'ADD_TO_CART',
-      payload: product,
-    });
-    navigate('/cart');
+    dispatch(addToCart({ item: { ...product, count } }));
+    setCount(1);
   };
 
   const handleGoToCart = () => {
@@ -80,42 +74,52 @@ const CardItem = ({ product }) => {
   const { locale } = React.useContext(LocaleContext);
 
   return (
-    <CardContainer>
-      <CardImage
-        height="235"
-        width="100%"
-        placeholder={
-          <Skeleton variant="rectangular" animation="wave" height={'235px'} />
-        }
-        src={`https://res.cloudinary.com/eundangdotcom/image/upload/v1666578066/${idImageProduct}`}
-        alt={namePlant}
-      />
-      <CardContent>
-        <PlantTitleText>{getText(truncate(namePlant, 17))}</PlantTitleText>
-        <PlantPriceText mt={2}>
-          {locale === 'id' ? 'Dari' : 'From'} {rupiah(price)}
-        </PlantPriceText>
-      </CardContent>
-      <CardActionsContainer>
-        <ActionButton
-          bgcolor={colors.white}
-          txcolor="#000"
-          size="large"
-          onClick={isItemInCart ? handleGoToCart : handleAddToCart}
-        >
-          <FaShoppingCart />
-        </ActionButton>
-        <ActionButton
-          component={Link}
-          to={`/product/detail/${_id}`}
-          bgcolor={colors.secondary}
-          txcolor={colors.white}
-          size="large"
-        >
-          {locale === 'id' ? 'Lihat Detail' : 'See More'}
-        </ActionButton>
-      </CardActionsContainer>
-    </CardContainer>
+    <>
+      {loading ? (
+        <SkeletonCardItem />
+      ) : (
+        <CardContainer>
+          <CardImage
+            height="235"
+            width="100%"
+            placeholder={
+              <Skeleton
+                variant="rectangular"
+                animation="wave"
+                height={'235px'}
+              />
+            }
+            src={`https://res.cloudinary.com/eundangdotcom/image/upload/v1666578066/${idImageProduct}`}
+            alt={namePlant}
+          />
+          <CardContent>
+            <PlantTitleText noWrap>{namePlant}</PlantTitleText>
+            <PlantPriceText mt={2}>
+              {locale === 'id' ? 'Dari' : 'From'} {rupiah(price)}
+            </PlantPriceText>
+          </CardContent>
+          <CardActionsContainer>
+            <ActionButton
+              bgcolor={colors.white}
+              txcolor="#000"
+              size="large"
+              onClick={isItemInCart ? handleGoToCart : handleAddToCart}
+            >
+              <FaShoppingCart />
+            </ActionButton>
+            <ActionButton
+              component={Link}
+              to={`/product/detail/${_id}`}
+              bgcolor={colors.secondary}
+              txcolor={colors.white}
+              size="large"
+            >
+              {locale === 'id' ? 'Lihat Detail' : 'See More'}
+            </ActionButton>
+          </CardActionsContainer>
+        </CardContainer>
+      )}
+    </>
   );
 };
 export default CardItem;
