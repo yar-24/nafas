@@ -31,7 +31,8 @@ const Product = ({
       <Stack
         direction="row"
         gap={1}
-        justifyContent={{ xs: 'space-between', sm: 'flex-end' }}>
+        justifyContent={{ xs: 'space-between', sm: 'flex-end' }}
+      >
         <Button
           variant="contained"
           disableElevation
@@ -44,7 +45,8 @@ const Product = ({
             borderRadius: 0,
             fontWeight: 600,
           }}
-          aria-label="filter">
+          aria-label="filter"
+        >
           Filter
         </Button>
         <FormControl>
@@ -58,7 +60,8 @@ const Product = ({
             color="primary"
             displayEmpty
             inputProps={{ 'aria-label': 'Without label' }}
-            checked={sort === Sort}>
+            checked={sort === Sort}
+          >
             <MenuItem name="price" value="">
               {locale === 'id' ? 'Urutkan : Default' : 'Sort by : Default'}
             </MenuItem>
@@ -75,35 +78,22 @@ const Product = ({
           </Select>
         </FormControl>
       </Stack>
-<<<<<<< HEAD
-
-=======
->>>>>>> c63f26a45c6aa809ca14eda336f93471118b6f7e
       <Grid
         maxWidth="100%"
         container
         rowSpacing={{ xs: 2, sm: 3, md: 2, lg: 3 }}
-        columnSpacing={{ xs: 0, sm: 3, md: 2, lg: 3 }}>
+        columnSpacing={{ xs: 0, sm: 3, md: 2, lg: 3 }}
+      >
         {!loading ? (
-<<<<<<< HEAD
           Array.from(new Array(6)).map((index, i) => (
             <Grid item key={i} xs={12} sm={12} md={4}>
               <SkeletonCardItem />
               <h1>{index}</h1>
-=======
-          Array.from(new Array(6)).map((index) => (
-            <Grid item key={index} xs={12} sm={12} md={4}>
-              <SkeletonCardItem />
->>>>>>> c63f26a45c6aa809ca14eda336f93471118b6f7e
             </Grid>
           ))
         ) : products.length > 0 ? (
           products.map((product, index) => (
-<<<<<<< HEAD
-            <Grid item key={index} xs={12} sm={12} md={4} >
-=======
             <Grid item key={index} xs={12} sm={12} md={4}>
->>>>>>> c63f26a45c6aa809ca14eda336f93471118b6f7e
               <CardItem product={product} />
             </Grid>
           ))
@@ -113,7 +103,8 @@ const Product = ({
               variant="body1"
               sx={{ fontFamily: fonts.inter, lineHeight: 2 }}
               style={{ marginLeft: '30px' }}
-              gutterBottom>
+              gutterBottom
+            >
               {locale === 'id'
                 ? 'Tidak ada yang ditampilkan.'
                 : 'Nothing to display.'}
